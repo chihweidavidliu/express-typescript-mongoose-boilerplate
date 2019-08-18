@@ -1,5 +1,5 @@
 // lib/app.ts
-import express = require("express");
+import express from "express";
 import router from "./router";
 import mongoose from "mongoose";
 //config
@@ -23,8 +23,10 @@ router(app);
 
 // Database
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI).catch((err: Error) => console.log("There was an error", err));
+mongoose.connect(`${process.env.MONGODB_URI}`).catch((err: Error) => console.log("There was an error", err));
 
-app.listen(process.env.PORT, function() {
+export const server = app.listen(process.env.PORT, function() {
     console.log("Example app listening on port 3000!");
 });
+
+export default app;
